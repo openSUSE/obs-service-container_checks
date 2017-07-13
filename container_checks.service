@@ -1,0 +1,10 @@
+<service name="container_checks">
+  <summary>Various checks for the services container</summary>
+  <description>This service does various checks for the container (e.g. docker) it is running in. This service
+is not for productive use.
+</description>
+  <parameter name="checks">
+    <description>Takes a comma separated list of test cases to execute or ALL to run all checks.</description>
+  </parameter>
+</service>
+

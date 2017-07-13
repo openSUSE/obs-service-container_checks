@@ -1,0 +1,52 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+use Getopt::Long;
+use Test::More;
+
+my $checks;
+my $outdir;
+my @checks_to_run;
+my %all_checks = (
+   1 => \&check_innerscript_readonly,
+   2 => \&check_network_access
+);
+
+if (! GetOptions ("checks=s",\$checks,'outdir=s',\$outdir)) {
+  print_usage();
+  exit 1;
+}
+
+if (! $checks or $checks == 'ALL') {
+  @checks_to_run = sort(keys(%all_checks));
+} else {
+  @checks_to_run = split(/,/,$checks);
+}
+
+Test::More->builder->output("$outdir/container_check.logs");
+
+plan tests => scalar(@checks_to_run);
+
+foreach my $check (@checks_to_run) {
+  $all_checks{$check}();
+}
+
+
+sub print_usage {
+  my $basename = $0;
+  $basename =~ s#.*/(\w*)$#$1#;
+  print "Usage: $basename [--checks 1,2,...]\n";
+}
+
+sub check_innerscript_readonly {
+  my $res = open(FH,'>','../scripts/innerscript.sh.commmand');
+  ok(!$res,"Checking ../scripts/innerscript.sh.commmand: $!" );
+  close(FH) if ($res);
+}
+
+sub check_network_access {
+  `ping -c 1 www.nic.de`;
+  ok(($? gt 0),"Checking network access");
+}
+
