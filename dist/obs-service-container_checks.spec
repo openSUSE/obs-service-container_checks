@@ -45,7 +45,7 @@ is not for productive use.
 %defattr(-,root,root)
 %doc README.md LICENSE
 /usr/lib/obs/service/container_checks
-/usr/lib/obs/service/container_checks.services
+/usr/lib/obs/service/container_checks.service
 
 %changelog
 
