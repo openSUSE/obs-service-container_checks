@@ -40,9 +40,9 @@ sub print_usage {
 }
 
 sub check_innerscript_readonly {
-  my $res = open(FH,'>','../scripts/innerscript.sh.commmand');
+  my $res = open(my $fh,'>','../scripts/innerscript.sh.commmand');
   ok(!$res,"Checking ../scripts/innerscript.sh.commmand: $!" );
-  close(FH) if ($res);
+  close($fh) if ($res);
 }
 
 sub check_network_access {
