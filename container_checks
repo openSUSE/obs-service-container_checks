@@ -46,7 +46,7 @@ sub check_innerscript_readonly {
 }
 
 sub check_network_access {
-  `ping -c 1 www.nic.de`;
+  `ping -c 1 www.nic.de 2>/dev/null`;
   ok(($? gt 0),"Checking network access");
 }
 
