@@ -52,8 +52,8 @@ sub check_network_access {
 
 sub check_rpmlist_checksum {
   my $sum = `rpm -qa|sha1sum -`;
-  $sum ~= s/ -\s*//;
-  ok(($? gt 0),"Checking rpm -qa md5: $md5");
+  $sum =~ s/ -\s*//;
+  ok(($? gt 0),"Checking rpm -qa md5: $sum");
 }
 
 
