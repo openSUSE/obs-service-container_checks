@@ -48,13 +48,13 @@ sub check_innerscript_readonly {
 
 sub check_network_access {
   `ping -c 1 www.nic.de 2>/dev/null`;
-  ok(($? gt 0),"Checking network access");
+  ok(($? > 0),"Checking network access");
 }
 
 sub check_rpmlist_checksum {
   my $sum = `rpm -qa|sha1sum -`;
   $sum =~ s/ -\s*//;
-  ok(($? gt 0),"Checking rpm -qa md5: $sum");
+  ok(($? == 0),"Checking rpm -qa sha1: $sum");
 }
 
 
