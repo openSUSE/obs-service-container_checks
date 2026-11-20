@@ -10,7 +10,8 @@ my $outdir;
 my @checks_to_run;
 my %all_checks = (
    1 => \&check_innerscript_readonly,
-   2 => \&check_network_access
+   2 => \&check_network_access,
+   3 => \&check_rpmlist_checksum,
 );
 
 if (! GetOptions ("checks=s",\$checks,'outdir=s',\$outdir)) {
